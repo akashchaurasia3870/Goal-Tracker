@@ -10,6 +10,7 @@ import ResetPasswordPage from '../pages/auth/ResetPasswordPage';
 import SettingsPage from '../pages/settings/SettingsPage';
 import GoalsPage from '../pages/goals/GoalsPage';
 import MilestonesPage from '../pages/milestones/MilestonesPage';
+import TasksPage from '../pages/tasks/TasksPage';
 import PlaceholderPage from '../components/common/PlaceholderPage';
 
 const AppRoutes = () => {
@@ -51,16 +52,7 @@ const AppRoutes = () => {
             />
           }
         />
-        <Route
-          path="tasks"
-          element={
-            <PlaceholderPage
-              title="Tasks Management"
-              description="List, Kanban, Compact views with filters, priorities, and standalone task support."
-              phase="Phase 6: Task Management"
-            />
-          }
-        />
+        <Route path="tasks" element={<TasksPage />} />
         <Route
           path="recurring"
           element={
