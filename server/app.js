@@ -13,6 +13,7 @@ const recurringRoutes = require('./routes/recurring.routes');
 const notificationRoutes = require('./routes/notification.routes');
 const calendarRoutes = require('./routes/calendar.routes');
 const achievementRoutes = require('./routes/achievement.routes');
+const analyticsRoutes = require('./routes/analytics.routes');
 const { notFoundHandler, errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
@@ -61,6 +62,7 @@ app.use('/api/recurring-tasks', recurringRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/calendar', calendarRoutes);
 app.use('/api/achievements', achievementRoutes);
+app.use('/api/analytics', analyticsRoutes);
 
 // Fallback & Error Handling
 app.use(notFoundHandler);

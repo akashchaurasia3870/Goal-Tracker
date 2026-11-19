@@ -13,6 +13,7 @@ import MilestonesPage from '../pages/milestones/MilestonesPage';
 import CalendarPage from '../pages/calendar/CalendarPage';
 import CompletedPage from '../pages/tasks/CompletedPage';
 import AchievementsPage from '../pages/rewards/AchievementsPage';
+import AnalyticsPage from '../pages/analytics/AnalyticsPage';
 import TasksPage from '../pages/tasks/TasksPage';
 import MyDayPage from '../pages/tasks/MyDayPage';
 import UpcomingPage from '../pages/tasks/UpcomingPage';
@@ -48,16 +49,7 @@ const AppRoutes = () => {
         <Route path="calendar" element={<CalendarPage />} />
         <Route path="completed" element={<CompletedPage />} />
         <Route path="achievements" element={<AchievementsPage />} />
-        <Route
-          path="analytics"
-          element={
-            <PlaceholderPage
-              title="Productivity Analytics"
-              description="Productivity reports, Recharts trends, completion rates, and stats."
-              phase="Phase 10: Analytics"
-            />
-          }
-        />
+        <Route path="analytics" element={<AnalyticsPage />} />
         <Route path="notifications" element={<NotificationsPage />} />
         <Route path="settings" element={<SettingsPage />} />
         <Route
