@@ -1,11 +1,15 @@
 require('dotenv').config();
 const app = require('./app');
 const connectDB = require('./config/db');
+const initCronJobs = require('./jobs/cron.jobs');
 
 const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB
-connectDB();
+connectDB().then(() => {
+  // Initialize background cron jobs after DB is connected
+  initCronJobs();
+});
 
 // Start HTTP Server
 const server = app.listen(PORT, () => {

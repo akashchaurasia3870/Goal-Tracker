@@ -287,6 +287,89 @@ class TaskService {
   }
 
   /**
+   * Get tasks for My Day planner
+   */
+  static async getMyDayTasks(userId) {
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
+
+    const endOfToday = new Date();
+    endOfToday.setHours(23, 59, 59, 999);
+
+    // 1. Tasks manually added to My Day, OR due today, OR overdue and not completed
+    const tasks = await Task.find({
+      userId,
+      isArchived: false,
+      $or: [
+        { isMyDay: true },
+        { dueDate: { $gte: startOfToday, $lte: endOfToday } },
+        { dueDate: { $lt: startOfToday }, status: { $ne: 'Completed' } },
+      ],
+    })
+      .populate('goalId', 'title color category')
+      .populate('milestoneId', 'title status order')
+      .sort({ status: 1, priority: -1, dueDate: 1 });
+
+    // 2. Today's recurring occurrences
+    const occurrences = await TaskOccurrence.find({
+      userId,
+      dueDate: { $gte: startOfToday, $lte: endOfToday },
+    }).populate('recurringTaskId', 'frequency interval reminderTime');
+
+    return { tasks, occurrences };
+  }
+
+  /**
+   * Get tasks grouped into upcoming timeframe buckets
+   */
+  static async getUpcomingTasks(userId) {
+    const now = new Date();
+    const startOfToday = new Date(now.setHours(0, 0, 0, 0));
+    const startOfTomorrow = new Date(startOfToday.getTime() + 24 * 60 * 60 * 1000);
+    const endOfTomorrow = new Date(startOfTomorrow.getTime() + 24 * 60 * 60 * 1000 - 1);
+    const endOfWeek = new Date(startOfToday.getTime() + 7 * 24 * 60 * 60 * 1000);
+    const endOfNextWeek = new Date(startOfToday.getTime() + 14 * 24 * 60 * 60 * 1000);
+
+    const allTasks = await Task.find({ userId, isArchived: false })
+      .populate('goalId', 'title color category targetDate')
+      .populate('milestoneId', 'title status dueDate')
+      .sort({ dueDate: 1, priority: -1 });
+
+    const buckets = {
+      overdue: [],
+      today: [],
+      tomorrow: [],
+      thisWeek: [],
+      nextWeek: [],
+      later: [],
+      noDate: [],
+    };
+
+    allTasks.forEach((t) => {
+      if (!t.dueDate) {
+        buckets.noDate.push(t);
+        return;
+      }
+      const d = new Date(t.dueDate);
+      if (d < startOfToday && t.status !== 'Completed') {
+        buckets.overdue.push(t);
+      } else if (d >= startOfToday && d < startOfTomorrow) {
+        buckets.today.push(t);
+      } else if (d >= startOfTomorrow && d <= endOfTomorrow) {
+        buckets.tomorrow.push(t);
+      } else if (d > endOfTomorrow && d <= endOfWeek) {
+        buckets.thisWeek.push(t);
+      } else if (d > endOfWeek && d <= endOfNextWeek) {
+        buckets.nextWeek.push(t);
+      } else {
+        buckets.later.push(t);
+      }
+    });
+
+    return buckets;
+  }
+
+  /**
    * Bulk action on multiple tasks
    */
   static async bulkAction(userId, { taskIds, action, payload }) {

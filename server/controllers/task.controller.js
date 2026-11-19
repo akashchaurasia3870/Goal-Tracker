@@ -20,6 +20,24 @@ class TaskController {
     }
   }
 
+  static async getMyDay(req, res, next) {
+    try {
+      const data = await TaskService.getMyDayTasks(req.userId);
+      return ApiResponse.success(res, data, 'My Day tasks retrieved');
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getUpcoming(req, res, next) {
+    try {
+      const buckets = await TaskService.getUpcomingTasks(req.userId);
+      return ApiResponse.success(res, buckets, 'Upcoming tasks retrieved');
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async getById(req, res, next) {
     try {
       const task = await TaskService.getTaskById(req.userId, req.params.id);

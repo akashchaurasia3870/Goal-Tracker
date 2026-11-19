@@ -9,6 +9,8 @@ const userRoutes = require('./routes/user.routes');
 const goalRoutes = require('./routes/goal.routes');
 const milestoneRoutes = require('./routes/milestone.routes');
 const taskRoutes = require('./routes/task.routes');
+const recurringRoutes = require('./routes/recurring.routes');
+const notificationRoutes = require('./routes/notification.routes');
 const { notFoundHandler, errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
@@ -53,6 +55,8 @@ app.use('/api/users', userRoutes);
 app.use('/api/goals', goalRoutes);
 app.use('/api/milestones', milestoneRoutes);
 app.use('/api/tasks', taskRoutes);
+app.use('/api/recurring-tasks', recurringRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 // Fallback & Error Handling
 app.use(notFoundHandler);

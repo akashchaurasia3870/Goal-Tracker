@@ -16,6 +16,8 @@ router.use(authenticate);
 
 router.post('/', validate(createTaskSchema), TaskController.create);
 router.get('/', validate(taskQuerySchema, 'query'), TaskController.getAll);
+router.get('/my-day', TaskController.getMyDay);
+router.get('/upcoming', TaskController.getUpcoming);
 router.get('/:id', TaskController.getById);
 router.put('/:id', validate(updateTaskSchema), TaskController.update);
 router.delete('/:id', TaskController.delete);

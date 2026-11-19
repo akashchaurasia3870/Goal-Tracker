@@ -11,6 +11,10 @@ import SettingsPage from '../pages/settings/SettingsPage';
 import GoalsPage from '../pages/goals/GoalsPage';
 import MilestonesPage from '../pages/milestones/MilestonesPage';
 import TasksPage from '../pages/tasks/TasksPage';
+import MyDayPage from '../pages/tasks/MyDayPage';
+import UpcomingPage from '../pages/tasks/UpcomingPage';
+import RecurringTasksPage from '../pages/tasks/RecurringTasksPage';
+import NotificationsPage from '../pages/notifications/NotificationsPage';
 import PlaceholderPage from '../components/common/PlaceholderPage';
 
 const AppRoutes = () => {
@@ -32,37 +36,10 @@ const AppRoutes = () => {
         }
       >
         <Route index element={<DashboardPage />} />
-        <Route
-          path="my-day"
-          element={
-            <PlaceholderPage
-              title="My Day"
-              description="Daily task planner inspired by Google Tasks with overdue & today's focus."
-              phase="Phase 7: Daily Productivity"
-            />
-          }
-        />
-        <Route
-          path="upcoming"
-          element={
-            <PlaceholderPage
-              title="Upcoming Tasks"
-              description="Future tasks grouped by Today, Tomorrow, This Week, Next Week, and Later."
-              phase="Phase 7: Daily Productivity"
-            />
-          }
-        />
+        <Route path="my-day" element={<MyDayPage />} />
+        <Route path="upcoming" element={<UpcomingPage />} />
         <Route path="tasks" element={<TasksPage />} />
-        <Route
-          path="recurring"
-          element={
-            <PlaceholderPage
-              title="Recurring Tasks"
-              description="Manage daily, weekday, weekly, monthly and custom recurring occurrences."
-              phase="Phase 7: Daily Productivity"
-            />
-          }
-        />
+        <Route path="recurring" element={<RecurringTasksPage />} />
         <Route path="goals" element={<GoalsPage />} />
         <Route path="milestones" element={<MilestonesPage />} />
         <Route
@@ -95,16 +72,7 @@ const AppRoutes = () => {
             />
           }
         />
-        <Route
-          path="notifications"
-          element={
-            <PlaceholderPage
-              title="Notification Center"
-              description="Reminders, overdue alerts, and milestone accomplishment notifications."
-              phase="Phase 7 & 10"
-            />
-          }
-        />
+        <Route path="notifications" element={<NotificationsPage />} />
         <Route path="settings" element={<SettingsPage />} />
         <Route
           path="admin"
