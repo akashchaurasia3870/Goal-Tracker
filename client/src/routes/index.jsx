@@ -19,6 +19,7 @@ import MyDayPage from '../pages/tasks/MyDayPage';
 import UpcomingPage from '../pages/tasks/UpcomingPage';
 import RecurringTasksPage from '../pages/tasks/RecurringTasksPage';
 import NotificationsPage from '../pages/notifications/NotificationsPage';
+import AdminPage from '../pages/admin/AdminPage';
 import PlaceholderPage from '../components/common/PlaceholderPage';
 
 const AppRoutes = () => {
@@ -56,11 +57,7 @@ const AppRoutes = () => {
           path="admin"
           element={
             <ProtectedRoute requiredRole="Admin">
-              <PlaceholderPage
-                title="Admin Management Panel"
-                description="Manage user directory, activate/deactivate accounts, system audit trail, and global preferences."
-                phase="Admin Protected Area"
-              />
+              <AdminPage />
             </ProtectedRoute>
           }
         />

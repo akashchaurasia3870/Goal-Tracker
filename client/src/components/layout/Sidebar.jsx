@@ -19,6 +19,7 @@ import {
   ChevronRight,
   X,
 } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
 import { sampleGoals } from '../../data/goal_data';
 
 const navItems = [
@@ -39,6 +40,14 @@ const navItems = [
 ];
 
 const Sidebar = ({ isCollapsed, onToggleCollapse, mobileOpen, onCloseMobile }) => {
+  const { user } = useAuth();
+  const isAdmin = user?.role === 'Admin';
+
+  const visibleNavItems = navItems.filter((item) => {
+    if (item.path === '/admin') return isAdmin;
+    return true;
+  });
+
   const content = (
     <div className="flex flex-col h-full bg-white border-r border-slate-200">
       {/* Brand Header */}
@@ -66,7 +75,7 @@ const Sidebar = ({ isCollapsed, onToggleCollapse, mobileOpen, onCloseMobile }) =
 
       {/* Navigation List */}
       <nav className="flex-1 px-2.5 py-4 space-y-1 overflow-y-auto">
-        {navItems.map((item) => {
+        {visibleNavItems.map((item) => {
           const Icon = item.icon;
           return (
             <NavLink
