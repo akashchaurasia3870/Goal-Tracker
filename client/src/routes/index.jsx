@@ -8,6 +8,7 @@ import RegisterPage from '../pages/auth/RegisterPage';
 import ForgotPasswordPage from '../pages/auth/ForgotPasswordPage';
 import ResetPasswordPage from '../pages/auth/ResetPasswordPage';
 import SettingsPage from '../pages/settings/SettingsPage';
+import GoalsPage from '../pages/goals/GoalsPage';
 import PlaceholderPage from '../components/common/PlaceholderPage';
 
 const AppRoutes = () => {
@@ -69,16 +70,7 @@ const AppRoutes = () => {
             />
           }
         />
-        <Route
-          path="goals"
-          element={
-            <PlaceholderPage
-              title="Goals Management"
-              description="Manage long-term objectives, categories, priorities, and completion progress."
-              phase="Phase 4: Goal Management"
-            />
-          }
-        />
+        <Route path="goals" element={<GoalsPage />} />
         <Route
           path="milestones"
           element={
