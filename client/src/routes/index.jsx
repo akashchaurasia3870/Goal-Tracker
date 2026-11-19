@@ -10,6 +10,7 @@ import ResetPasswordPage from '../pages/auth/ResetPasswordPage';
 import SettingsPage from '../pages/settings/SettingsPage';
 import GoalsPage from '../pages/goals/GoalsPage';
 import MilestonesPage from '../pages/milestones/MilestonesPage';
+import CalendarPage from '../pages/calendar/CalendarPage';
 import TasksPage from '../pages/tasks/TasksPage';
 import MyDayPage from '../pages/tasks/MyDayPage';
 import UpcomingPage from '../pages/tasks/UpcomingPage';
@@ -42,16 +43,7 @@ const AppRoutes = () => {
         <Route path="recurring" element={<RecurringTasksPage />} />
         <Route path="goals" element={<GoalsPage />} />
         <Route path="milestones" element={<MilestonesPage />} />
-        <Route
-          path="calendar"
-          element={
-            <PlaceholderPage
-              title="Calendar Management"
-              description="Monthly, weekly, and daily calendar views with drag-and-drop rescheduling."
-              phase="Phase 8: Calendar"
-            />
-          }
-        />
+        <Route path="calendar" element={<CalendarPage />} />
         <Route
           path="completed"
           element={
