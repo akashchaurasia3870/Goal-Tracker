@@ -7,6 +7,7 @@ const healthRoutes = require('./routes/health.routes');
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
 const goalRoutes = require('./routes/goal.routes');
+const milestoneRoutes = require('./routes/milestone.routes');
 const { notFoundHandler, errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
@@ -49,6 +50,7 @@ app.use('/api/health', healthRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/goals', goalRoutes);
+app.use('/api/milestones', milestoneRoutes);
 
 // Fallback & Error Handling
 app.use(notFoundHandler);

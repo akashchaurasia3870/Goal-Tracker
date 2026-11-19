@@ -9,6 +9,7 @@ import ForgotPasswordPage from '../pages/auth/ForgotPasswordPage';
 import ResetPasswordPage from '../pages/auth/ResetPasswordPage';
 import SettingsPage from '../pages/settings/SettingsPage';
 import GoalsPage from '../pages/goals/GoalsPage';
+import MilestonesPage from '../pages/milestones/MilestonesPage';
 import PlaceholderPage from '../components/common/PlaceholderPage';
 
 const AppRoutes = () => {
@@ -71,16 +72,7 @@ const AppRoutes = () => {
           }
         />
         <Route path="goals" element={<GoalsPage />} />
-        <Route
-          path="milestones"
-          element={
-            <PlaceholderPage
-              title="Milestone Management"
-              description="Divide goals into achievable stages with custom rewards and auto-completion."
-              phase="Phase 5: Milestone Management"
-            />
-          }
-        />
+        <Route path="milestones" element={<MilestonesPage />} />
         <Route
           path="calendar"
           element={
