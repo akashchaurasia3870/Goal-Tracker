@@ -11,6 +11,8 @@ import SettingsPage from '../pages/settings/SettingsPage';
 import GoalsPage from '../pages/goals/GoalsPage';
 import MilestonesPage from '../pages/milestones/MilestonesPage';
 import CalendarPage from '../pages/calendar/CalendarPage';
+import CompletedPage from '../pages/tasks/CompletedPage';
+import AchievementsPage from '../pages/rewards/AchievementsPage';
 import TasksPage from '../pages/tasks/TasksPage';
 import MyDayPage from '../pages/tasks/MyDayPage';
 import UpcomingPage from '../pages/tasks/UpcomingPage';
@@ -44,16 +46,8 @@ const AppRoutes = () => {
         <Route path="goals" element={<GoalsPage />} />
         <Route path="milestones" element={<MilestonesPage />} />
         <Route path="calendar" element={<CalendarPage />} />
-        <Route
-          path="completed"
-          element={
-            <PlaceholderPage
-              title="Completed Archive"
-              description="Review past achievements and completed goals, milestones, and tasks."
-              phase="Phase 6: Task Management"
-            />
-          }
-        />
+        <Route path="completed" element={<CompletedPage />} />
+        <Route path="achievements" element={<AchievementsPage />} />
         <Route
           path="analytics"
           element={
