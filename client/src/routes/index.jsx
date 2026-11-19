@@ -1,13 +1,33 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import AppLayout from '../components/layout/AppLayout';
+import ProtectedRoute from '../components/common/ProtectedRoute';
 import DashboardPage from '../pages/dashboard/DashboardPage';
+import LoginPage from '../pages/auth/LoginPage';
+import RegisterPage from '../pages/auth/RegisterPage';
+import ForgotPasswordPage from '../pages/auth/ForgotPasswordPage';
+import ResetPasswordPage from '../pages/auth/ResetPasswordPage';
+import SettingsPage from '../pages/settings/SettingsPage';
 import PlaceholderPage from '../components/common/PlaceholderPage';
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<AppLayout />}>
+      {/* Public Auth Routes */}
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
+
+      {/* Protected App Routes */}
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <AppLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route index element={<DashboardPage />} />
         <Route
           path="my-day"
@@ -109,27 +129,23 @@ const AppRoutes = () => {
             />
           }
         />
-        <Route
-          path="settings"
-          element={
-            <PlaceholderPage
-              title="User Profile & Settings"
-              description="Preferences, timezone, date formats, theme, and optional XP system toggle."
-              phase="Phase 2 & Settings"
-            />
-          }
-        />
+        <Route path="settings" element={<SettingsPage />} />
         <Route
           path="admin"
           element={
-            <PlaceholderPage
-              title="Admin Panel"
-              description="User accounts management, system activity logs, and global settings."
-              phase="Phase 2: Authorization"
-            />
+            <ProtectedRoute requiredRole="Admin">
+              <PlaceholderPage
+                title="Admin Management Panel"
+                description="Manage user directory, activate/deactivate accounts, system audit trail, and global preferences."
+                phase="Admin Protected Area"
+              />
+            </ProtectedRoute>
           }
         />
       </Route>
+
+      {/* Catch-all Fallback */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };
